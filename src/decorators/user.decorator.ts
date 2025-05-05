@@ -33,23 +33,23 @@ AnR3BXtb5oPzt/i7MllNEQv4fX3TFUfkrgKgQSIdYqVa44NgmRU+tgemPBWKBddq
 O3xzq/A0fQVeid/ZykTCXyfQXSZWRNqxrMjMykK73shO
 -----END CERTIFICATE-----`;
 
-    console.log(
-      'Verified Token',
-      verify(token, b, {
-        algorithms: ['RS256'],
-      }),
-    );
+    // console.log(
+    //   'Verified Token',
+    //   verify(token, b, {
+    //     algorithms: ['RS256'],
+    //   }),
+    // );
 
-    const sub =
-      decodedToken && typeof decodedToken.sub === 'string'
-        ? decodedToken.sub
-        : null;
-    if (sub === null || sub === '') {
-      return false;
-    }
-    request.user = {
-      sub,
-    };
+    // const sub =
+    //   decodedToken && typeof decodedToken.sub === 'string'
+    //     ? decodedToken.sub
+    //     : null;
+    // if (sub === null || sub === '') {
+    //   return false;
+    // }
+    // request.user = {
+    //   sub,
+    // };
     console.log('request.user guard', request.user);
 
     return true;
