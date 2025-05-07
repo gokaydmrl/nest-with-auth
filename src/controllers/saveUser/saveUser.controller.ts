@@ -1,17 +1,27 @@
-import { Controller, Get, Req, Res, Post, Body } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Req,
+  Res,
+  Post,
+  Body,
+  HttpCode,
+} from '@nestjs/common';
 import { SaveUserService } from '../saveUser/saveUser.service';
 import { Request, Response } from 'express';
 import { UserSave } from 'src/types/user';
+import { TRes, IData } from 'src/types/testing';
 @Controller('saveUser')
 export class SaveUserController {
   constructor(private readonly saveUserService: SaveUserService) {}
 
   @Get('/get')
-  getUser(@Req() req: Request, @Res() res: Response): any {
-    res.status(200).send({
+  @HttpCode(200)
+  getUser(): IData {
+    return {
       success: true,
       data: 'hellow orld',
-    });
+    };
   }
 
   @Post(`/save`)

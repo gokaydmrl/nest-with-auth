@@ -1,17 +1,21 @@
 import { CanActivate, ExecutionContext, Injectable } from '@nestjs/common';
 import { Request } from 'express';
 import { decode, verify } from 'jsonwebtoken';
+import { client } from '../db/index';
+import { users } from 'drizzle/schema';
+import { eq } from 'drizzle-orm';
+
 @Injectable()
 export class AuthGuard implements CanActivate {
-  canActivate(context: ExecutionContext): boolean {
+  async canActivate(context: ExecutionContext): Promise<boolean> {
     const request = context.switchToHttp().getRequest<Request>();
 
-    const token = request.headers.authorization?.split(' ')[1] ?? '';
+    //  const token = request.headers.authorization?.split(' ')[1] ?? '';
 
     const decodedToken = decode(
       request.headers.authorization?.split(' ')[1] ?? '',
     );
-    console.log('decodedToken', decodedToken);
+    // console.log('decodedToken', decodedToken);
 
     const b = `-----BEGIN CERTIFICATE-----
 MIIDHTCCAgWgAwIBAgIJD5pjAG91mu94MA0GCSqGSIb3DQEBCwUAMCwxKjAoBgNV
@@ -50,7 +54,20 @@ O3xzq/A0fQVeid/ZykTCXyfQXSZWRNqxrMjMykK73shO
     // request.user = {
     //   sub,
     // };
-    console.log('request.user guard', request.user);
+    const sub =
+      decodedToken && decodedToken.sub && typeof decodedToken.sub === 'string'
+        ? decodedToken.sub
+        : '';
+    const user = await client
+      .select()
+      .from(users)
+      .where(eq(users.sub, sub))
+      .limit(1);
+    //  console.log('user guarddd', user);
+    if (!user || user.length === 0) {
+      return false;
+    }
+    request.user = { sub: user[0].sub };
 
     return true;
   }
