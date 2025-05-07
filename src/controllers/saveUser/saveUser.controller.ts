@@ -10,7 +10,7 @@ import {
 import { SaveUserService } from '../saveUser/saveUser.service';
 import { Request, Response } from 'express';
 import { UserSave } from 'src/types/user';
-import { TRes, IData } from 'src/types/testing';
+import { IData } from 'src/types/testing';
 @Controller('saveUser')
 export class SaveUserController {
   constructor(private readonly saveUserService: SaveUserService) {}
@@ -31,7 +31,6 @@ export class SaveUserController {
     @Body()
     body: UserSave,
   ): Promise<any> {
-    console.log('body.userId', body.sub);
     const response = await this.saveUserService.saveUser(body);
     if (!response) {
       return res.status(200).send({

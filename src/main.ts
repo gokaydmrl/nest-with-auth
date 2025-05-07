@@ -17,7 +17,6 @@ async function start() {
 start()
   .then(() => {
     console.log(`Server started successfully at port ${process.env.PORT} `);
-    console.log(`Server DB URL ${process.env.DATABASE_URL} `);
   })
   .catch((error) => {
     console.error('Error starting server:', error);

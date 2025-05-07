@@ -8,7 +8,6 @@ export class CatsService {
   ) {}
   async getCats() {
     const usersData = await this.db.select().from(users);
-    // console.log('usersData', usersData);
 
     return usersData;
   }
