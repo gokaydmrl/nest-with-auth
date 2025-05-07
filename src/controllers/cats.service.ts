@@ -1,8 +1,15 @@
-import { Injectable } from '@nestjs/common';
-
+import { Injectable, Inject } from '@nestjs/common';
+import { drizzle } from 'drizzle-orm/neon-http';
+import { users } from 'drizzle/schema';
 @Injectable()
 export class CatsService {
-  getCats(): string {
-    return 'they are cats';
+  constructor(
+    @Inject('DRIZZLE') private readonly db: ReturnType<typeof drizzle>,
+  ) {}
+  async getCats() {
+    const usersData = await this.db.select().from(users);
+    // console.log('usersData', usersData);
+
+    return usersData;
   }
 }
