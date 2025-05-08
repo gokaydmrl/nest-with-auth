@@ -6,6 +6,7 @@ import { users } from 'drizzle/schema';
 import { eq } from 'drizzle-orm';
 import { UserSave } from 'src/types/user';
 import * as dotenv from 'dotenv';
+import { UnauthorizedException } from '@nestjs/common';
 dotenv.config();
 
 @Injectable()
@@ -16,7 +17,12 @@ export class AuthGuard implements CanActivate {
     const token = request.headers.authorization?.split(' ')[1] ?? '';
 
     if (!token) {
-      return false;
+      throw new UnauthorizedException({
+        statusCode: 403,
+        message:
+          'This is customized unauthorized message. You have no token. You must login to have token',
+        error: 'Unauthorized', // optional: default is "Unauthorized"
+      });
     }
 
     const SIGNING_KEY = process.env.SIGNING_KEY ?? '';
