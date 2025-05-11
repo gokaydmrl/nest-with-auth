@@ -13,6 +13,8 @@ import { SaveUserController } from './controllers/saveUser/saveUser.controller';
 import { SaveUserService } from './controllers/saveUser/saveUser.service';
 import { ConfigModule } from '@nestjs/config';
 import { DrizzleModule } from './db/drizzle.module';
+import { OpenAiService } from './services/openai.service';
+import { SseService } from './services/sse.service';
 @Module({
   imports: [
     ConfigModule.forRoot({
@@ -22,7 +24,13 @@ import { DrizzleModule } from './db/drizzle.module';
     DrizzleModule,
   ],
   controllers: [AppController, CatsController, SaveUserController],
-  providers: [AppService, CatsService, SaveUserService],
+  providers: [
+    AppService,
+    CatsService,
+    SaveUserService,
+    OpenAiService,
+    SseService,
+  ],
 })
 export class AppModule implements NestModule {
   configure(consumer: MiddlewareConsumer) {
