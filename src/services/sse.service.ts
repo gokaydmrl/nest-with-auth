@@ -7,13 +7,13 @@ import { map } from 'rxjs/operators';
 export class SseService {
   private emitter = new EventEmitter();
 
-  get stream$(): Observable<MessageEvent> {
-    return fromEvent(this.emitter, 'message').pipe(
+  stream$(username: string): Observable<MessageEvent> {
+    return fromEvent(this.emitter, username).pipe(
       map((data) => ({ data })),
     ) as Observable<MessageEvent>;
   }
 
-  send(data: any) {
-    this.emitter.emit('message', data);
+  send(data: any, username: string) {
+    this.emitter.emit(username, data);
   }
 }

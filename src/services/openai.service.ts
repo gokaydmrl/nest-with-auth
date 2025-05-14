@@ -68,7 +68,7 @@ export class OpenAiService {
       );
       // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
       const parsedMessage: Record<string, any> = JSON.parse(messageData);
-      this.sseService.send(parsedMessage);
+      this.sseService.send(parsedMessage, username);
       console.log(
         'parsedMessage',
         parsedMessage.type === 'response.audio.delta'
@@ -77,6 +77,6 @@ export class OpenAiService {
       );
     });
 
-    return this.sseService.stream$;
+    return this.sseService.stream$(username);
   }
 }
