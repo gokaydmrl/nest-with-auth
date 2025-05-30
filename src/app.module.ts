@@ -15,6 +15,7 @@ import { ConfigModule } from '@nestjs/config';
 import { DrizzleModule } from './db/drizzle.module';
 import { OpenAiService } from './services/openai.service';
 import { SseService } from './services/sse.service';
+import { DatabaseService } from './services/db.service';
 @Module({
   imports: [
     ConfigModule.forRoot({
@@ -30,6 +31,7 @@ import { SseService } from './services/sse.service';
     SaveUserService,
     OpenAiService,
     SseService,
+    DatabaseService,
   ],
 })
 export class AppModule implements NestModule {

@@ -17,7 +17,7 @@ export class AppController {
   ) {}
 
   @Get()
-  getHello(@Req() req: Request, @Res() res: Response): any {
+  getHello(@Req() req: Request, @Res() res: Response) {
     res
       .status(200)
       .send({ success: true, message: 'Hello World - github/gokaydmrl' });

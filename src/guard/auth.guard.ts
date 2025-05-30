@@ -1,16 +1,19 @@
 import { CanActivate, ExecutionContext, Injectable } from '@nestjs/common';
 import { Request } from 'express';
 import { verify } from 'jsonwebtoken';
-import { client } from '../db/index';
+// import { client } from '../db/index';
 import { users } from 'drizzle/schema';
 import { eq } from 'drizzle-orm';
 import { UserSave } from 'src/types/user';
 import * as dotenv from 'dotenv';
 import { UnauthorizedException } from '@nestjs/common';
+import { DatabaseService } from 'src/services/db.service';
+
 dotenv.config();
 
 @Injectable()
 export class AuthGuard implements CanActivate {
+  constructor(private readonly dbService: DatabaseService) {}
   async canActivate(context: ExecutionContext): Promise<boolean> {
     const request = context.switchToHttp().getRequest<Request>();
 
@@ -38,7 +41,7 @@ export class AuthGuard implements CanActivate {
         ? verifiedToken.sub
         : '';
 
-    const user = await client
+    const user = await this.dbService.client
       .select()
       .from(users)
       .where(eq(users.sub, sub))

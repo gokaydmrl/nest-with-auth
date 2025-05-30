@@ -1,9 +1,15 @@
 import { findUser } from './findUser';
-import { client } from '../db/index';
 import { users } from 'drizzle/schema';
 import { UserSave } from 'src/types/user';
-export const saveUser = async ({ user }: { user: UserSave }) => {
-  const isUserExist = await findUser({ sub: user.sub });
+import { DatabaseService } from 'src/services/db.service';
+export const saveUser = async ({
+  user,
+  dbClient,
+}: {
+  user: UserSave;
+  dbClient: DatabaseService;
+}) => {
+  const isUserExist = await findUser({ sub: user.sub, dbClient });
   try {
     if (isUserExist) {
       return null;
@@ -15,8 +21,8 @@ export const saveUser = async ({ user }: { user: UserSave }) => {
       password: user.password,
       username: user.username,
     };
-    await client.insert(users).values(userBody);
-    const userToReturn = await findUser({ sub: userBody.sub });
+    await dbClient.client.insert(users).values(userBody);
+    const userToReturn = await findUser({ sub: userBody.sub, dbClient });
     return userToReturn;
   } catch (error) {
     console.log('error', error);

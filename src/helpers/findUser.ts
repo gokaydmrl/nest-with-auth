@@ -1,9 +1,15 @@
 import { users } from 'drizzle/schema';
-import { client } from '../db/index';
 import { eq } from 'drizzle-orm';
+import { DatabaseService } from 'src/services/db.service';
 
-export const findUser = async ({ sub }: { sub: string }) => {
-  const user = await client
+export const findUser = async ({
+  sub,
+  dbClient,
+}: {
+  sub: string;
+  dbClient: DatabaseService;
+}) => {
+  const user = await dbClient.client
     .select()
     .from(users)
     .where(eq(users.sub, sub))
