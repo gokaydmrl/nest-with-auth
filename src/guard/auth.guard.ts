@@ -7,7 +7,7 @@ import { eq } from 'drizzle-orm';
 import { UserSave } from 'src/types/user';
 import * as dotenv from 'dotenv';
 import { UnauthorizedException } from '@nestjs/common';
-import { DatabaseService } from 'src/services/db.service';
+import { DatabaseService } from '../modules/database/db.service';
 
 dotenv.config();
 

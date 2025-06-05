@@ -18,6 +18,7 @@ export class SaveUserController {
   @Get('/get')
   @HttpCode(200)
   getUser(): IData {
+    const a = this.saveUserService.getUser();
     return {
       success: true,
       data: 'hellow orld',

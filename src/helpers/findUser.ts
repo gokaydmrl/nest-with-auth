@@ -1,6 +1,6 @@
 import { users } from 'drizzle/schema';
 import { eq } from 'drizzle-orm';
-import { DatabaseService } from 'src/services/db.service';
+import { DatabaseService } from '../modules/database/db.service';
 
 export const findUser = async ({
   sub,

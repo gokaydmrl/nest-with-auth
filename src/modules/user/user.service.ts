@@ -1,11 +1,15 @@
 import { Injectable } from '@nestjs/common';
 import { UserSave } from 'src/types/user';
 import { saveUser } from 'src/helpers/saveUser';
-import { DatabaseService } from 'src/services/db.service';
+import { DatabaseService } from '../database/db.service';
+import { users } from 'drizzle/schema';
 @Injectable()
 export class UserService {
   constructor(private readonly dbClient: DatabaseService) {}
-  getUser(): string {
+  async getUser(): Promise<string> {
+    const usersAll = await this.dbClient.client.select().from(users);
+    console.log(usersAll);
+
     return 'this is user';
   }
   async saveUser(user: UserSave): Promise<UserSave | null> {

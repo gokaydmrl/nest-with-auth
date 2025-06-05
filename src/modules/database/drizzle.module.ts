@@ -1,6 +1,6 @@
 // drizzle.module.ts
 import { Module } from '@nestjs/common';
-import { db } from '../../drizzle.config';
+import { db } from '../../../drizzle.config';
 
 @Module({
   providers: [
