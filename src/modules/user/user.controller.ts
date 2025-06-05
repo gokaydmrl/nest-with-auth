@@ -10,18 +10,19 @@ import {
 import { UserService } from './user.service';
 import { Request, Response } from 'express';
 import { UserSave } from 'src/types/user';
-import { IData } from 'src/types/testing';
+//import { IData } from 'src/types/testing';
 @Controller('saveUser')
 export class SaveUserController {
   constructor(private readonly saveUserService: UserService) {}
 
   @Get('/get')
   @HttpCode(200)
-  getUser(): IData {
-    const a = this.saveUserService.getUser();
+  async getUser() {
+    const a = await this.saveUserService.getUser();
+
     return {
       success: true,
-      data: 'hellow orld',
+      data: a,
     };
   }
 

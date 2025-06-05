@@ -1,0 +1,37 @@
+version: '3.8'
+
+services:
+  app:
+    build:
+      context: .
+      args:
+        PORT: 3000
+    ports:
+      - '3000:3000'
+    environment:
+      - PORT=3000
+    env_file:
+      - .env
+    depends_on:
+      - db
+      # - redis
+    volumes:
+      - ./static:/app/static
+    command: npm start
+
+  db:
+    image: postgres:16
+    restart: always
+    environment:
+      POSTGRES_DB: myappdb
+      POSTGRES_USER: myuser
+      POSTGRES_PASSWORD: mypassword
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+  # redis:
+  #   image: redis:7
+  #   restart: always
+
+volumes:
+  pgdata:
