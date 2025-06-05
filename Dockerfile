@@ -1,4 +1,4 @@
-FROM node:23-alpine
+FROM node:18-alpine
 
 # Create app directory
 WORKDIR /app
@@ -19,4 +19,4 @@ ENV PORT=$PORT
 EXPOSE $PORT
 
 # Run the app
-CMD ["npm", "start"]
+CMD ["npm", "start","--max-old-space-size=512"]
