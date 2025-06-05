@@ -3,7 +3,7 @@ import { UserSave } from 'src/types/user';
 import { saveUser } from 'src/helpers/saveUser';
 import { DatabaseService } from 'src/services/db.service';
 @Injectable()
-export class SaveUserService {
+export class UserService {
   constructor(private readonly dbClient: DatabaseService) {}
   getUser(): string {
     return 'this is user';

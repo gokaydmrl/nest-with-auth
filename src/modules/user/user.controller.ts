@@ -7,13 +7,13 @@ import {
   Body,
   HttpCode,
 } from '@nestjs/common';
-import { SaveUserService } from '../saveUser/saveUser.service';
+import { UserService } from './user.service';
 import { Request, Response } from 'express';
 import { UserSave } from 'src/types/user';
 import { IData } from 'src/types/testing';
 @Controller('saveUser')
 export class SaveUserController {
-  constructor(private readonly saveUserService: SaveUserService) {}
+  constructor(private readonly saveUserService: UserService) {}
 
   @Get('/get')
   @HttpCode(200)
