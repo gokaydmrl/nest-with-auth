@@ -29,8 +29,8 @@ import { UserModule } from './modules/user/user.module';
     DrizzleModule,
     GraphQLModule.forRoot<ApolloDriverConfig>({
       driver: ApolloDriver,
-      autoSchemaFile: true, // or autoSchemaFile: join(process.cwd(), 'src/schema.gql')
-      playground: true,
+      autoSchemaFile: false, // or autoSchemaFile: join(process.cwd(), 'src/schema.gql')
+      playground: false,
     }),
     UserModule,
   ],
