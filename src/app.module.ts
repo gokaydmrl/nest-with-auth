@@ -20,6 +20,7 @@ import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
 import { UserResolver } from './modules/user/user.resolver';
 import { UserService } from './modules/user/user.service';
 import { UserModule } from './modules/user/user.module';
+import { join } from 'path';
 @Module({
   imports: [
     ConfigModule.forRoot({
@@ -29,7 +30,7 @@ import { UserModule } from './modules/user/user.module';
     DrizzleModule,
     GraphQLModule.forRoot<ApolloDriverConfig>({
       driver: ApolloDriver,
-      autoSchemaFile: false, // or autoSchemaFile: join(process.cwd(), 'src/schema.gql')
+      autoSchemaFile: join(process.cwd(), 'src/schema.gql'), // or autoSchemaFile: join(process.cwd(), 'src/schema.gql')
       playground: false,
     }),
     UserModule,
