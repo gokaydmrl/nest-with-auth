@@ -10,7 +10,6 @@ import { CatsController } from './controllers/cats/cats.controller';
 import { CatsService } from './controllers/cats/cats.service';
 import { LoggerMiddleware } from './middleware/logger.middleware';
 import { ConfigModule } from '@nestjs/config';
-// import { DrizzleModule } from './db/drizzle.module';
 import { DrizzleModule } from './modules/database/drizzle.module';
 import { OpenAiService } from './services/openai.service';
 import { SseService } from './services/sse.service';

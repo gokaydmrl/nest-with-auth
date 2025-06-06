@@ -1,10 +1,9 @@
 import { CanActivate, ExecutionContext, Injectable } from '@nestjs/common';
 import { Request } from 'express';
 import { verify } from 'jsonwebtoken';
-// import { client } from '../db/index';
-import { users } from 'drizzle/schema';
+import { users } from '../../drizzle/schema';
 import { eq } from 'drizzle-orm';
-import { UserSave } from 'src/types/user';
+import { UserSave } from '../types/user';
 import * as dotenv from 'dotenv';
 import { UnauthorizedException } from '@nestjs/common';
 import { DatabaseService } from '../modules/database/db.service';

@@ -1,11 +1,7 @@
 import { Controller, Get, UseGuards } from '@nestjs/common';
 import { CatsService } from './cats.service';
-import { Request } from 'express';
-import { AuthGuard } from 'src/guard/auth.guard';
-// import { client } from 'src/db';
-// import { users } from '../../drizzle/schema';
-import { User } from 'src/decorator/user.dercorator';
-//import { UserSave } from 'src/types/user';
+import { AuthGuard } from '../../guard/auth.guard';
+import { User } from '../../decorator/user.dercorator';
 @Controller('cats')
 @UseGuards(AuthGuard)
 export class CatsController {

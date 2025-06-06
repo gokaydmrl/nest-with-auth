@@ -1,8 +1,8 @@
 import { Injectable } from '@nestjs/common';
-import { UserSave } from 'src/types/user';
-import { saveUser } from 'src/helpers/saveUser';
+import { UserSave } from '../../types/user';
+import { saveUser } from '../../helpers/saveUser';
 import { DatabaseService } from '../database/db.service';
-import { users } from 'drizzle/schema';
+import { users } from '../../../drizzle/schema';
 @Injectable()
 export class UserService {
   constructor(private readonly dbClient: DatabaseService) {}

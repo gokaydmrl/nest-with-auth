@@ -1,6 +1,6 @@
 import { Injectable, Inject } from '@nestjs/common';
 import { drizzle } from 'drizzle-orm/neon-http';
-import { users } from 'drizzle/schema';
+import { users } from '../../../drizzle/schema';
 @Injectable()
 export class CatsService {
   constructor(

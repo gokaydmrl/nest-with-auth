@@ -1,5 +1,5 @@
 import { findUser } from './findUser';
-import { users } from 'drizzle/schema';
+import { users } from '../../drizzle/schema';
 import { UserSave } from 'src/types/user';
 import { DatabaseService } from '../modules/database/db.service';
 export const saveUser = async ({
