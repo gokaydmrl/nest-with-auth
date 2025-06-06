@@ -38,10 +38,9 @@ RUN npm run build
 # Set environment variables
 ENV NODE_ENV=production
 ENV NODE_OPTIONS=--max-old-space-size=2048
-ENV DATABASE_URL="postgresql://neondb-nest_owner:npg_5fGykIgZPp0K@ep-shiny-silence-a4o56dpf-pooler.us-east-1.aws.neon.tech/neondb-nest?sslmode=require"
 
 # Expose port
-ARG PORT=3000
+ARG PORT
 ENV PORT=$PORT
 EXPOSE $PORT
 
